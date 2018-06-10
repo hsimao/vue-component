@@ -9,9 +9,16 @@
 </head>
 <body>
     <div id="app">
-        
+        <div class="container">
+            <!-- select component-->
+            <select-component :citys="data"></select-component>
+
+            <h3>關注城市</h3>
+            <!-- card component -->
+            <card-component :datas="data"></card-component>
+
+        </div>
     </div>
-    <div class="box">jj</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
