@@ -15,7 +15,7 @@ $color-yellow: #f9ca24
     width: 0
     height: 0
     top: 50%
-    right: 1%
+    left: 39%
     transform: rotate(35deg) translate(-50%, -50%)
     border-right: $size solid transparent
     border-bottom: $size*0.7 solid $color
@@ -47,6 +47,11 @@ $color-yellow: #f9ca24
 *
     box-sizing: border-box
 
+ul
+    list-style: none
+    margin: 0
+    padding: 0
+
 body
     margin: 0
     color: $color-primary
@@ -60,10 +65,10 @@ body
     padding: 20px
 select
     width: 100%
-    border: solid 1px blue
     padding: 12px 20px
     border: none
-    font-size: 16px
+    font-size: 18px
+    color: $color-primary
     background-color: $color-secondary
     letter-spacing: 2px
     display: inline-block
@@ -82,6 +87,29 @@ select
     justify-content: center
     align-items: center
     background-color: $color-secondary-light
+    &-tool
+        display: flex
+        height: 50px
+        .title
+            margin: 0 20px 0 0
+            padding: 0
+            line-height: 50px
+        input
+            margin-top: 5px
+            padding: 0 10px
+            font-size: 16px
+            color: $color-primary
+            height: 35px
+            outline: none
+            background-color: $color-secondary-light
+            border-radius: 4px
+            border: none
+
+.cards.follow
+    background-color: $color-secondary
+    padding-bottom: 25px
+    margin-bottom: 25px
+
 .card
     display: inline-block
     width: 24%
@@ -94,19 +122,122 @@ select
         transform: translate(-2px, -2px)
         background-color: darken($color-white,5)
     &-top
+        display: flex
         height: 50px
         line-height: 50px
         position: relative
         background-color: $color-primary
         padding: 0 15px
     &-title
+        flex: 1 1 auto
         color: $color-white
         letter-spacing: 2px
-    &-star
-        +star($color-white)
-    &-star.active
-        +star($color-yellow)
+    &-star-box
+        position: relative
+        width: 40px
+        cursor: pointer
+        .star
+            +star($color-white, 10px)
+            pointer-events: none
+        .star-active
+            +star($color-white, 3px)
+            pointer-events: none
+        &:hover
+            .star
+                +star($color-yellow, 12px)
+            .star-active
+                +star($color-yellow, 50px)
+                left: 12%
+                opacity: 0
+    &-star-box.active
+        .star
+            +star($color-yellow, 12px)
+        .star-active
+            +star($color-yellow, 3px)
+
     &-info
         padding: 10px 15px
     &-api,&-pm,&-status,&-time
         line-height: 30px
+
+    
+
+// $color card
+$color-1: #78fee0  // 良好
+$color-2: #ecf0f1  // 普通
+$color-3: #f56a47  // 對敏感族群不健康
+$color-4: #f73859  // 對所有族群不健康
+$color-5: #8559a5  // 非常不健康
+$color-6: #571179  // 危害
+
+.colors
+    display: flex
+    flex-flow: column wrap
+    justify-content: flex-start
+    align-items: flex-start
+    position: absolute
+    top: 20vh
+    .title
+        // border: solid 1px blue
+        padding: 6px 10px 6px 10px
+        margin-bottom: 10px
+        margin-left: -7px
+        box-shadow: 0 4px 6px 0 rgba(black, 0.08)
+        background-color: #fff
+        color: $color-primary
+        font-size: 18px
+        position: relative
+        &:before
+            content: ''
+            position: absolute
+            bottom: -7px
+            left: 0
+            width: 0
+            height: 0
+            border-top: 7px solid darken($color-white,5)
+            border-left: 7px solid transparent
+
+.color
+    position: relative
+    flex: 0 0 auto
+    width: 50px
+    height: 50px
+    margin-bottom: 10px
+    box-shadow: 0 4px 6px 0 rgba(black, 0.08)
+    text-align: center
+    span
+        position: absolute
+        bottom: 0
+        left: 25px
+        white-space: nowrap
+        visibility: hidden
+        opacity: 0
+        transition: all .3s
+        background-color: $color-white
+        padding: 6px 10px
+        z-index: 10
+        letter-spacing: 1px
+        font-size: 14px
+        color: $color-primary
+        box-shadow: 0 4px 6px 0 rgba(black, 0.08)
+    &:hover
+        span
+            visibility: visible
+            opacity: 1
+
+.color-1
+    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%) !important
+.color-2
+    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%) !important
+.color-3
+    background-color: $color-3 !important
+    color: $color-white
+.color-4
+    background-color: $color-4 !important
+    color: $color-white
+.color-5
+    background-color: $color-5 !important
+    color: $color-white
+.color-6
+    background-color: $color-6 !important
+    color: $color-white
