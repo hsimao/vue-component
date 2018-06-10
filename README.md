@@ -1,3 +1,3 @@
 # Vue 課程作業
-live demo https://hsimao.github.io/vue-component/
+live demo https://codepen.io/hsimao/full/RJKBjy/
 
