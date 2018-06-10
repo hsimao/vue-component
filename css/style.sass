@@ -1,7 +1,112 @@
+// $color
+$color-primary: #3f5468
+$color-secondary: #b8e4c9
+$color-secondary-light: #e9fadd
+$color-third: #42291c
+$color-white: #f2f2f0
+$color-black: #323643
+$color-yellow: #f9ca24
+
+// $mixin
+@mixin star($color: green, $size: 10px, $time: .3s)
+    margin: $size*0.5 0
+    position: absolute
+    display: block
+    width: 0
+    height: 0
+    top: 50%
+    right: 1%
+    transform: rotate(35deg) translate(-50%, -50%)
+    border-right: $size solid transparent
+    border-bottom: $size*0.7 solid $color
+    border-left: $size solid transparent
+    transition: all $time ease-out
+    backface-visibility: hidden
+    &:before,&:after
+        content: ''
+        position: absolute
+        display: block
+        width: 0px
+        height: 0px
+        transition: all $time ease-out
+    &:before
+        border-bottom: $size*0.8 solid $color
+        border-left: $size*0.3 solid transparent
+        border-right: $size*0.3 solid transparent
+        top: -$size*0.45
+        left: -$size*0.65
+        transform: rotate(-35deg)
+    &:after
+        border-right: $size solid transparent
+        border-bottom: $size*0.7 solid $color
+        border-left: $size solid transparent
+        top: $size*0.03
+        left: -$size*1.05
+        transform: rotate(-70deg)
+
 *
     box-sizing: border-box
 
+body
+    margin: 0
+    color: $color-primary
+    font-size: 16px
+    font-family: '微軟正黑體', sans-serif
 
-.box
-    width: 100px
-    height: 100px
+
+.container
+    max-width: 1140px
+    margin: 0 auto
+    padding: 20px
+select
+    width: 100%
+    border: solid 1px blue
+    padding: 12px 20px
+    border: none
+    font-size: 16px
+    background-color: $color-secondary
+    letter-spacing: 2px
+    display: inline-block
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    outline: none
+    border-radius: 0
+
+
+// card
+.cards
+    display: flex
+    width: 100%
+    flex-flow: row wrap
+    justify-content: center
+    align-items: center
+    background-color: $color-secondary-light
+.card
+    display: inline-block
+    width: 24%
+    margin: 20px
+    box-shadow: 0 2px 6px 0 rgba(black,0.2)
+    background-color: $color-white
+    transition: all .3s
+    backface-visibility: hidden
+    &:hover
+        transform: translate(-2px, -2px)
+        background-color: darken($color-white,5)
+    &-top
+        height: 50px
+        line-height: 50px
+        position: relative
+        background-color: $color-primary
+        padding: 0 15px
+    &-title
+        color: $color-white
+        letter-spacing: 2px
+    &-star
+        +star($color-white)
+    &-star.active
+        +star($color-yellow)
+    &-info
+        padding: 10px 15px
+    &-api,&-pm,&-status,&-time
+        line-height: 30px
