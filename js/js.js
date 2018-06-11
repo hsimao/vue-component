@@ -16,22 +16,6 @@ Vue.component('select-component', {
         filterLocation(){
             this.$emit('select-update', this.selectLocation)
         }
-    },
-    computed: {
-        // 過濾重複名稱
-        filterCity(){
-            const citys = [...this.citys]
-            for (let i=0; i<citys.length; i++) {
-                for (let j=i+1; j<citys.length; j++) {
-                //arr[i] 前面與後面進行比較
-                    if (citys[i].County == citys[j].County) {
-                        citys.splice(j,1); //將後面刪除
-                        j--;  //因為刪除會讓arr.length減少,所以需要退回位置
-                    }
-                }
-            }
-            return citys
-        }
     }
 })
 
