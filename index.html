@@ -15,7 +15,7 @@
             <!-- select component-->
             <select-component :citys="data"></select-component>
             <!-- card component -->
-            <card-component :datas="data"></card-component>
+            <card-component :datas="data" :follow="follow" @follow-update="followToggle"></card-component>
 
         </div>
     </div>

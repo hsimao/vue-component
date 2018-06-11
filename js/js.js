@@ -41,7 +41,7 @@ Vue.component('card-component', {
                 <div class="card" :class="statusColor(item.Status)" v-for="item in filterFollow">
                     <div class="card-top">
                         <div class="card-title">{{item.County}} - {{item.SiteName}}</div>
-                        <div class="card-star-box" :class="{'active' : followActive(item.SiteName)}" @click="followToggle(item.SiteName)">
+                        <div class="card-star-box" :class="{'active' : followActive(item.SiteName)}" @click="followToggleC(item.SiteName)">
                             <i class="star"></i>
                             <i class="star-active"></i>
                         </div>
@@ -58,7 +58,7 @@ Vue.component('card-component', {
                 <div class="card" :class="statusColor(item.Status)" v-for="item in datas">
                     <div class="card-top">
                         <div class="card-title">{{item.County}} - {{item.SiteName}}</div>
-                        <div class="card-star-box" :class="{'active' : followActive(item.SiteName)}" @click="followToggle(item.SiteName)">
+                        <div class="card-star-box" :class="{'active' : followActive(item.SiteName)}" @click="followToggleC(item.SiteName)">
                             <i class="star"></i>
                             <i class="star-active"></i>
                         </div>
@@ -75,11 +75,13 @@ Vue.component('card-component', {
     `,
     data(){
         return {
-            filterCity: ['基隆','汐止', '士林', '左營'],
-            current: ''
+            current: '',
         }
     },
-    props: ['datas'],
+    props: {
+        datas: {},
+        follow: {}
+    },
     methods: {
         statusColor(type){
             if (type === '良好') return 'color-1'
@@ -90,24 +92,20 @@ Vue.component('card-component', {
             if (type === '危害') return 'color-1'
         },
         followActive(city){
-            return this.filterCity.some((item)=>{
+            return this.follow.some((item)=>{
                 return item === city
             })
         },
-        followToggle(target){
-            if (this.filterCity.some((item)=>item ===target)) {
-                this.filterCity.splice(this.filterCity.indexOf(target), 1)
-            } else {
-                this.filterCity.push(target)
-            }
+        followToggleC(target){
+            this.$emit('follow-update', target)
         }
     },
     computed: {
         filterFollow(){
             const citys = []
-            for (let i=0; i < this.filterCity.length; i++) {
+            for (let i=0; i < this.follow.length; i++) {
                 this.datas.forEach((item)=>{
-                    if (item.SiteName === this.filterCity[i]) citys.push(item)
+                    if (item.SiteName === this.follow[i]) citys.push(item)
                 })
             }
             return citys
@@ -158,7 +156,8 @@ new Vue({
         data: [],
         location: [],
         stared: [],
-        filter: ''
+        filter: '',
+        follow: ['基隆','汐止', '鳳山', '士林', '左營'],
     },
     methods: {
         getData(){
@@ -169,12 +168,32 @@ new Vue({
                 _this.data = data
                 console.log(data[0])
             })
+        },
+        getFollowInLocal() {
+            const follow = localStorage.getItem('cityFollow')
+            try {
+                return follow ? JSON.parse(follow) : []
+            } catch (e) {
+                return []
+            }
+        },
+        saveFollowInLocal(){
+            localStorage.setItem('cityFollow', JSON.stringify(this.follow))
+        },
+        followToggle(target){
+            // 如果已經follow, 就移除
+            if (this.follow.some((item)=>item === target)) {
+                this.follow.splice(this.follow.indexOf(target), 1)
+                this.saveFollowInLocal()
+            //反之新增
+            } else {
+                this.follow.push(target)
+                this.saveFollowInLocal()
+            }
         }
-    },
-    computed: {
-
     },
     created(){
         this.getData()
+        this.follow = this.getFollowInLocal()
     }
 })
