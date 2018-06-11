@@ -7,6 +7,30 @@ ul {
   margin: 0;
   padding: 0; }
 
+select {
+  position: relative;
+  width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 3px solid #3f5468;
+  font-size: 18px;
+  color: #3f5468;
+  background-color: #b8e4c9;
+  letter-spacing: 2px;
+  display: block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  border-radius: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.125); }
+
+h1 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 10px; }
+
 body {
   margin: 0;
   color: #3f5468;
@@ -18,21 +42,6 @@ body {
   margin: 0 auto;
   padding: 20px; }
 
-select {
-  width: 100%;
-  padding: 12px 20px;
-  border: none;
-  font-size: 18px;
-  color: #3f5468;
-  background-color: #b8e4c9;
-  letter-spacing: 2px;
-  display: inline-block;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  outline: none;
-  border-radius: 0; }
-
 .cards {
   display: flex;
   width: 100%;
@@ -42,11 +51,15 @@ select {
   background-color: #e9fadd; }
   .cards-tool {
     display: flex;
-    height: 50px; }
+    justify-content: flex-end;
+    height: 40px; }
     .cards-tool .title {
-      margin: 0 20px 0 0;
-      padding: 0;
-      line-height: 50px; }
+      margin: 0;
+      padding: 0 20px;
+      line-height: 40px;
+      background-color: #3f5468;
+      color: #f2f2f0;
+      font-weight: 300; }
     .cards-tool input {
       margin-top: 5px;
       padding: 0 10px;
@@ -60,7 +73,6 @@ select {
 
 .cards.follow {
   background-color: #b8e4c9;
-  padding-bottom: 25px;
   margin-bottom: 25px; }
 
 .card {
@@ -307,6 +319,10 @@ select {
     padding: 10px 15px; }
   .card-api, .card-pm, .card-status, .card-time {
     line-height: 30px; }
+  .card-status {
+    background-color: #f2f2f0;
+    text-align: center;
+    border-radius: 100px; }
 
 .colors {
   display: flex;
@@ -314,7 +330,7 @@ select {
   justify-content: flex-start;
   align-items: flex-start;
   position: absolute;
-  top: 20vh; }
+  top: 30vh; }
   .colors .title {
     padding: 6px 10px 6px 10px;
     margin-bottom: 10px;

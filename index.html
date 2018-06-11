@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Vue-元件變化作業</title>
+    <title>台灣空氣品質觀測</title>
 </head>
 <body>
     <div id="app">
         <div class="container">
+            <h1>台灣空氣品質觀測 </h1>
             <!-- color card component -->
             <color-card></color-card>
             <!-- select component-->
-            <select-component :citys="data"></select-component>
+            <select-component :option="location" @select-update="targetCity"></select-component>
             <!-- card component -->
-            <card-component :datas="data" :follow="follow" @follow-update="followToggle"></card-component>
+            <card-component :datas="filterSelect" :filter-data="followData" :follow="follow" @follow-update="followToggle"></card-component>
 
         </div>
     </div>

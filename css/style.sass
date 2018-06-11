@@ -44,6 +44,7 @@ $color-yellow: #f9ca24
         left: -$size*1.05
         transform: rotate(-70deg)
 
+// $reset
 *
     box-sizing: border-box
 
@@ -52,34 +53,42 @@ ul
     margin: 0
     padding: 0
 
+select
+    position: relative
+    width: 100%
+    padding: 12px 20px
+    margin-bottom: 20px
+    border: none
+    border-bottom: 3px solid $color-primary
+    font-size: 18px
+    color: $color-primary
+    background-color: $color-secondary
+    letter-spacing: 2px
+    display: block
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+    outline: none
+    border-radius: 0
+    box-shadow: 0 4px 6px rgba(black,0.125)
+h1
+    margin: 0
+    padding: 0
+    padding-bottom: 10px
+
 body
     margin: 0
     color: $color-primary
     font-size: 16px
     font-family: '微軟正黑體', sans-serif
 
-
 .container
     max-width: 1140px
     margin: 0 auto
     padding: 20px
-select
-    width: 100%
-    padding: 12px 20px
-    border: none
-    font-size: 18px
-    color: $color-primary
-    background-color: $color-secondary
-    letter-spacing: 2px
-    display: inline-block
-    -webkit-appearance: none
-    -moz-appearance: none
-    appearance: none
-    outline: none
-    border-radius: 0
 
 
-// card
+// $card
 .cards
     display: flex
     width: 100%
@@ -89,11 +98,15 @@ select
     background-color: $color-secondary-light
     &-tool
         display: flex
-        height: 50px
+        justify-content: flex-end
+        height: 40px
         .title
-            margin: 0 20px 0 0
-            padding: 0
-            line-height: 50px
+            margin: 0
+            padding: 0 20px
+            line-height: 40px
+            background-color: $color-primary
+            color: $color-white
+            font-weight: 300
         input
             margin-top: 5px
             padding: 0 10px
@@ -107,7 +120,6 @@ select
 
 .cards.follow
     background-color: $color-secondary
-    padding-bottom: 25px
     margin-bottom: 25px
 
 .card
@@ -159,8 +171,11 @@ select
         padding: 10px 15px
     &-api,&-pm,&-status,&-time
         line-height: 30px
+    &-status
+        background-color: $color-white
+        text-align: center
+        border-radius: 100px
 
-    
 
 // $color card
 $color-1: #78fee0  // 良好
@@ -176,7 +191,7 @@ $color-6: #571179  // 危害
     justify-content: flex-start
     align-items: flex-start
     position: absolute
-    top: 20vh
+    top: 30vh
     .title
         // border: solid 1px blue
         padding: 6px 10px 6px 10px
