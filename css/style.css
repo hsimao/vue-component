@@ -330,7 +330,8 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   position: absolute;
-  top: 30vh; }
+  top: 30vh;
+  z-index: 10; }
   .colors .title {
     padding: 6px 10px 6px 10px;
     margin-bottom: 10px;
@@ -398,3 +399,35 @@ body {
 .color-6 {
   background-color: #571179 !important;
   color: #f2f2f0; }
+
+@media (max-width: 992px) {
+  .card {
+    width: 30%; } }
+
+@media (max-width: 768px) {
+  .card {
+    width: 40%; }
+  .colors {
+    margin-left: -64px;
+    transition: all .3s; }
+    .colors .title {
+      padding: 6px 15px; }
+      .colors .title:before {
+        content: '';
+        position: absolute;
+        top: 11px;
+        left: 88px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-left: 10px solid #3f5468;
+        border-bottom: 8px solid transparent;
+        transition: all .3s; }
+  .colors.active {
+    margin-left: 0; }
+    .colors.active .title:before {
+      transform: rotate(-180deg); } }
+
+@media (max-width: 568px) {
+  .card {
+    width: 80%; } }

@@ -192,8 +192,8 @@ $color-6: #571179  // 危害
     align-items: flex-start
     position: absolute
     top: 30vh
+    z-index: 10
     .title
-        // border: solid 1px blue
         padding: 6px 10px 6px 10px
         margin-bottom: 10px
         margin-left: -7px
@@ -256,3 +256,36 @@ $color-6: #571179  // 危害
 .color-6
     background-color: $color-6 !important
     color: $color-white
+
+
+// $RWD
+@media (max-width: 992px)
+    .card
+        width: 30%
+@media (max-width: 768px)
+    .card
+        width: 40%
+    .colors
+        margin-left: -64px
+        transition: all .3s
+        .title
+            padding: 6px 15px
+            &:before
+                content: ''
+                position: absolute
+                top: 11px
+                left: 88px
+                width: 0
+                height: 0
+                border-top: 8px solid transparent
+                border-left: 10px solid $color-primary
+                border-bottom: 8px solid transparent
+                transition: all .3s
+    .colors.active
+        margin-left: 0
+        .title:before
+            transform: rotate(-180deg)
+
+@media (max-width: 568px)
+    .card
+        width: 80%

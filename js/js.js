@@ -3,7 +3,7 @@ Vue.component('select-component', {
     template: `
     <select v-model="selectLocation" @change="filterLocation">
         <option value=""> --- 請選擇城市 --- </option>
-        <option :value="item.County" v-for="item in option">{{item.County}}</option>
+        <option :value="item" v-for="item in option">{{item}}</option>
     </select>
     `,
     data(){
@@ -92,25 +92,14 @@ Vue.component('card-component', {
         followToggleC(target){
             this.$emit('follow-update', target)
         }
-    },
-    computed: {
-        filterFollow(){
-            const citys = []
-            for (let i=0; i < this.follow.length; i++) {
-                this.datas.forEach((item)=>{
-                    if (item.SiteName === this.follow[i]) citys.push(item)
-                })
-            }
-            return citys
-        }
-    },
+    }
 })
 
 
 // 色卡組件
 Vue.component('color-card', {
     template: `
-        <ul class="colors">
+        <ul class="colors" :class="{'active': isShow}" @click="isShow = !isShow">
             <li class="title">空氣色卡</li>
             <li class="color color-1"><span>良好</span></li>
             <li class="color color-2"><span>普通</span></li>
@@ -120,6 +109,11 @@ Vue.component('color-card', {
             <li class="color color-6"><span>危害</span></li>
         </ul>
     `,
+    data(){
+        return {
+            isShow: false
+        }
+    },
     methods: {
         makeCenter(el){
             const boxH = el.offsetHeight
@@ -176,9 +170,9 @@ new Vue({
         },
         followToggle(target){
             // 如果已經follow, 就移除
-            if (this.follow.some((item)=>item === target)) {
+            const followOnly = new Set(this.follow)
+            if (followOnly.has(target)) {
                 this.follow.splice(this.follow.indexOf(target), 1)
-                this.saveFollowInLocal()
             //反之新增
             } else {
                 this.follow.push(target)
@@ -189,17 +183,13 @@ new Vue({
     computed: {
         // 過濾重複名稱，產生選項資料
         filterCity(){
-            const citys = [...this.data]
-            for (let i=0; i<citys.length; i++) {
-                for (let j=i+1; j<citys.length; j++) {
-                //arr[i] 前面與後面進行比較
-                    if (citys[i].County == citys[j].County) {
-                        citys.splice(j,1); //將後面刪除
-                        j--;  //因為刪除會讓arr.length減少,所以需要退回位置
-                    }
-                }
+            // 使用ES6 Set 方法改寫
+            const citys = new Set(this.data)
+            const location = new Set()
+            for (let item of citys) {
+                location.add(item.County)
             }
-            return citys
+            return [...location]
         },
         // 依照選擇城市回傳值
         filterSelect(){
